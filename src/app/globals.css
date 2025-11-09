@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 @import "tw-animate-css";
 /*
   ---break---
@@ -191,4 +191,55 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* custom reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+h1 {
+  @apply text-4xl font-bold;
+}
+h2 {
+  @apply text-3xl font-semibold;
+}
+h3 {
+  @apply text-2xl font-semibold;
+}
+h4 {
+  @apply text-xl font-medium;
+}
+h5 {
+  @apply text-lg font-medium;
+}
+h6 {
+  @apply text-base font-medium;
+}
+p {
+  @apply text-base;
+  overflow-wrap: break-word;
+}
+
+/* custom reset */
+.container {
+  @apply max-w-[1200px] mx-auto px-4;
 }
