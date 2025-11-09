@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={lexend.className}>{children}</body>
+      <body className={`${lexend.className} bg-zinc-50 text-zinc-700`}>{children}</body>
     </html>
   );
 }
