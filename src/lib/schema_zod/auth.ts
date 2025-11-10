@@ -30,3 +30,9 @@ export const signupSchema = z
   });
 
 export type SignupFormData = z.infer<typeof signupSchema>;
+
+export const loginSchema = z.object({
+  email: z.string().email("Veuillez entrer une adresse email valide."),
+});
+
+export type LoginFormData = z.infer<typeof loginSchema>;

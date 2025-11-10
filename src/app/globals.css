@@ -241,5 +241,11 @@ p {
 
 /* custom reset */
 .container {
-  @apply max-w-[1200px] mx-auto px-4;
+  @apply max-w-[1200px] mx-auto;
+}
+
+@media (max-width: 768px) {
+  .container {
+    @apply max-w-[90%];
+  }
 }

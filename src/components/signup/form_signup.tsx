@@ -2,8 +2,10 @@ import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
-import { signupSchema, SignupFormData } from "@/lib/schema_zod/signup";
+import { signupSchema, SignupFormData } from "@/lib/schema_zod/auth";
 import { FormField, PhoneField, SelectField, CheckboxField } from "../ui/form";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const companiesTypes = [
   {
@@ -25,6 +27,7 @@ const companiesTypes = [
 ];
 
 export default function SignupForm() {
+  const router = useRouter();
   const methods = useForm({
     resolver: zodResolver(signupSchema),
     defaultValues: {
@@ -47,10 +50,11 @@ export default function SignupForm() {
   const onSubmit = async (data: SignupFormData) => {
     try {
       console.log("Données du formulaire:", data);
-      alert("Compte créé avec succès ! " + JSON.stringify(data));
+      toast.success("Compte créé avec succès !");
+      router.push("/dashboard");
     } catch (error) {
       console.error("Erreur lors de la création du compte:", error);
-      alert("Une erreur est survenue. Veuillez réessayer.");
+      toast.error("Une erreur est survenue. Veuillez réessayer.");
     }
   };
 
