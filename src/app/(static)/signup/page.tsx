@@ -47,22 +47,75 @@ const SlideshowImages = [
   },
 ];
 
-function CardWhyUberEats({
+const FonctionnementUberEats = [
+  {
+    image:
+      "https://tb-static.uber.com/prod/udam-assets/3c3f70e6-bd04-495f-84d8-f7288ad01cb7.svg",
+    title: "Les clients passent commande",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus sunt, tenetur labore porro odit inventore voluptas laboriosam sint consequuntur minima molestiae ipsum impedit eius voluptates quas dicta? Ex, totam quos.",
+  },
+  {
+    image:
+      "https://tb-static.uber.com/prod/udam-assets/f83a023b-d455-4aab-97a0-12bc3026cebf.svg",
+    title: "Vous préparez",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus sunt, tenetur labore porro odit inventore voluptas laboriosam sint consequuntur minima molestiae ipsum impedit eius voluptates quas dicta? Ex, totam quos.",
+  },
+  {
+    image:
+      "https://tb-static.uber.com/prod/udam-assets/6194ae40-5638-4fb7-88d2-94178d4d3eba.svg",
+    title: "Les coursiers arrivent",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus sunt, tenetur labore porro odit inventore voluptas laboriosam sint consequuntur minima molestiae ipsum impedit eius voluptates quas dicta? Ex, totam quos.",
+  },
+];
+
+function CardFonctionnementUberEats({
+  image,
   title,
   description,
 }: {
+  image: string;
   title: string;
   description: string;
 }) {
   return (
     <div className="space-y-2">
+      <Image
+        src={image}
+        alt={title}
+        className="w-full h-auto object-cover"
+        width={100}
+        height={100}
+      />
+      <h4 className="text-zinc-800 mt-4 mb-2">{title}</h4>
+      <p>{description}</p>
+    </div>
+  );
+}
+
+interface CardWhyUberEatsProps {
+  title: string;
+  description: string;
+  icon?: React.ReactNode;
+}
+
+export function CardWhyUberEats({
+  title,
+  description,
+  icon,
+}: CardWhyUberEatsProps) {
+  return (
+    <div className="space-y-2">
+      {icon && <div>{icon}</div>}
       <h4 className="text-zinc-800">{title}</h4>
       <p>{description}</p>
     </div>
   );
 }
 
-function PageSignup() {
+export default function PageSignup() {
   const [currentImage, setCurrentImage] = useState(0);
 
   const handleNextImage = () => {
@@ -79,9 +132,9 @@ function PageSignup() {
 
   return (
     <div className="space-y-14 pb-14">
-      <section className="bg-[url(/images/point-de-vente-sur-un-marche.webp)] bg-cover bg-center h-full w-full">
-        <div className="container flex items-center justify-between gap-8">
-          <div className="w-2/4 bg-black p-3 space-y-4 self-end mb-10 text-white">
+      <section className="bg-black md:bg-[url(/images/point-de-vente-sur-un-marche.webp)] bg-cover bg-center h-full w-full">
+        <div className="container flex items-center justify-between md:gap-8 gap-0 flex-col md:flex-row">
+          <div className="md:w-2/4 w-full bg-black md:p-3 p-0 space-y-4 self-end md:mb-10 mb-5 text-white">
             <h1>Profitez d'une nouvelle source de revenus</h1>
             <p>
               La plateforme internationale d'Uber vous offre la flexibilité, la
@@ -89,7 +142,8 @@ function PageSignup() {
               avec davantage de clients. Devenez partenaire dès aujourd'hui.
             </p>
           </div>
-          <div className="bg-white px-5 py-14 h-full w-2/4 space-y-5 overflow-y-auto">
+
+          <div className="bg-white px-5 py-14 h-full md:w-2/4 w-full space-y-5 overflow-y-auto">
             <h2>Créez votre compte</h2>
             <div className="text-muted-foreground space-x-2 text-sm">
               <span>Vous avez déjà un compte ?</span>
@@ -107,7 +161,7 @@ function PageSignup() {
       <section className="container space-y-16">
         <div className="space-y-8">
           <h2 className="text-zinc-800">Pourquoi Uber Eats ?</h2>
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
             {whyUberEats.map((item) => (
               <CardWhyUberEats
                 key={item.title}
@@ -118,8 +172,8 @@ function PageSignup() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between gap-8">
-          <div className="w-2/5 space-y-4">
+        <div className="flex items-center justify-between gap-8 md:flex-row flex-col">
+          <div className="md:w-2/5 w-full space-y-4">
             <h3 className="text-zinc-800 text-2xl font-semibold">
               {SlideshowImages[currentImage].title}
             </h3>
@@ -128,7 +182,7 @@ function PageSignup() {
             </p>
           </div>
 
-          <div className="w-3/5 space-y-6">
+          <div className="md:w-3/5 w-full space-y-6">
             <div className="relative overflow-hidden rounded-lg">
               <Image
                 src={SlideshowImages[currentImage].image}
@@ -146,7 +200,7 @@ function PageSignup() {
                   <button
                     key={index}
                     onClick={() => setCurrentImage(index)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                       index === currentImage
                         ? "w-8 bg-zinc-800"
                         : "w-2 bg-zinc-300 hover:bg-zinc-400"
@@ -159,14 +213,14 @@ function PageSignup() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={handlePreviousImage}
-                  className="size-10 flex items-center justify-center text-zinc-600 hover:text-zinc-900 bg-zinc-200 hover:bg-zinc-300 rounded-full transition-colors duration-200"
+                  className="size-10 flex cursor-pointer items-center justify-center text-zinc-600 hover:text-zinc-900 bg-zinc-200 hover:bg-zinc-300 rounded-full transition-colors duration-200"
                   aria-label="Image précédente"
                 >
                   <ChevronLeft className="size-5" />
                 </button>
                 <button
                   onClick={handleNextImage}
-                  className="size-10 flex items-center justify-center text-zinc-600 hover:text-zinc-900 bg-zinc-200 hover:bg-zinc-300 rounded-full transition-colors duration-200"
+                  className="size-10 flex cursor-pointer items-center justify-center text-zinc-600 hover:text-zinc-900 bg-zinc-200 hover:bg-zinc-300 rounded-full transition-colors duration-200"
                   aria-label="Image suivante"
                 >
                   <ChevronRight className="size-5" />
@@ -175,9 +229,71 @@ function PageSignup() {
             </div>
           </div>
         </div>
+
+        <div className="space-y-8">
+          <h2 className="text-zinc-800 md:w-1/2 w-full">
+            Fonctionnement d'Uber Eats pour les restaurants partenaires
+          </h2>
+
+          <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
+            {FonctionnementUberEats.map((item) => (
+              <CardFonctionnementUberEats
+                key={item.title}
+                image={item.image}
+                title={item.title}
+                description={item.description}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-black py-14">
+        <div className="container  flex items-center justify-between gap-8 flex-col md:flex-row">
+          <div className="md:w-1/2 w-full space-y-4">
+            <h2 className="text-white">
+              « Uber Eats renforce la notoriété de notre marque dans des
+              quartiers qui seraient autrement hors de notre portée. »
+            </h2>
+            <p className="text-white">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+              quos. Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Numquam vel repudiandae quo cumque ipsam expedita. Corporis
+              eveniet quod culpa adipisci illo minus. Ad in laboriosam
+              architecto, eum fugiat labore eveniet!
+            </p>
+          </div>
+
+          <Image
+            src="/images/point-de-vente-sur-un-marche.webp"
+            alt="Uber Eats"
+            width={400}
+            height={400}
+            className="md:w-1/2 w-full h-auto object-cover"
+          />
+        </div>
+      </section>
+
+      <section className="container flex items-center justify-between gap-8 flex-col-reverse md:flex-row">
+        <Image
+          src="/images/point-de-vente-sur-un-marche.webp"
+          alt="Uber Eats"
+          width={400}
+          height={400}
+          className="md:w-1/2 w-full h-auto object-cover"
+        />
+
+        <div className="md:w-1/2 w-full space-y-4">
+          <h2 className="text-zinc-800">
+            Lancez-vous en seulement trois étapes
+          </h2>
+          <ol className="list-decimal list-inside space-y-2 pl-4">
+            <li>Dites-nous en plus sur votre restaurant.</li>
+            <li>Vous recevrez un email de confirmation.</li>
+            <li>Vous pouvez commencer à vendre vos plats.</li>
+          </ol>
+        </div>
       </section>
     </div>
   );
 }
-
-export default PageSignup;

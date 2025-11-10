@@ -15,7 +15,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 interface FormFieldProps {
   name: string;
-  label: string;
+  label?: string;
   type?: string;
   placeholder?: string;
   className?: string;

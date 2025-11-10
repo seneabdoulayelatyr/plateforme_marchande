@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, Lexend } from "next/font/google";
+import { Lexend } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 const lexend = Lexend({
   subsets: ["latin"],
@@ -19,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${lexend.className} bg-zinc-50 text-zinc-700`}>{children}</body>
+      <body className={`${lexend.className} bg-zinc-50 text-zinc-700`}>
+        {children}
+      </body>
+      <Toaster richColors />
     </html>
   );
 }
