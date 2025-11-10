@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { menu_items } from "@/lib/types/menu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useMediaQuery } from "@uidotdev/usehooks";
 
 interface SideMenuItemsProps {
   isOpen?: boolean;
@@ -11,7 +10,22 @@ interface SideMenuItemsProps {
 
 function SideMenuItems({ isOpen = false }: SideMenuItemsProps) {
   const pathname = usePathname();
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Check on mount
+    checkIsMobile();
+
+    // Add event listener
+    window.addEventListener("resize", checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   return (
     <nav className="flex flex-col gap-2 mt-4">
@@ -27,7 +41,7 @@ function SideMenuItems({ isOpen = false }: SideMenuItemsProps) {
               isActive ? "bg-white/20 text-white" : "text-white/80"
             }`}
           >
-            <Icon className="size-5 shrink-0" />
+            {Icon && <Icon className="size-5 shrink-0" />}
 
             {!isMobile && isOpen && (
               <span className="text-sm font-medium whitespace-nowrap">

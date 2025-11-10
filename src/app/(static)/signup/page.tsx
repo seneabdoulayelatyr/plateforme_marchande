@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import SignupForm from "@/components/signup/form_signup";
+import SignupForm from "@/components/allFormsSections/form_signup";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, UserIcon   } from "lucide-react";
+import { CardWhy } from "@/components/card_why";
 
 const whyUberEats = [
   {
@@ -49,22 +50,19 @@ const SlideshowImages = [
 
 const FonctionnementUberEats = [
   {
-    image:
-      "https://tb-static.uber.com/prod/udam-assets/3c3f70e6-bd04-495f-84d8-f7288ad01cb7.svg",
+    image: "/images/placeholder.svg",
     title: "Les clients passent commande",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus sunt, tenetur labore porro odit inventore voluptas laboriosam sint consequuntur minima molestiae ipsum impedit eius voluptates quas dicta? Ex, totam quos.",
   },
   {
-    image:
-      "https://tb-static.uber.com/prod/udam-assets/f83a023b-d455-4aab-97a0-12bc3026cebf.svg",
+    image: "/images/placeholder.svg",
     title: "Vous préparez",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus sunt, tenetur labore porro odit inventore voluptas laboriosam sint consequuntur minima molestiae ipsum impedit eius voluptates quas dicta? Ex, totam quos.",
   },
   {
-    image:
-      "https://tb-static.uber.com/prod/udam-assets/6194ae40-5638-4fb7-88d2-94178d4d3eba.svg",
+    image: "/images/placeholder.svg",
     title: "Les coursiers arrivent",
     description:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus sunt, tenetur labore porro odit inventore voluptas laboriosam sint consequuntur minima molestiae ipsum impedit eius voluptates quas dicta? Ex, totam quos.",
@@ -82,34 +80,12 @@ function CardFonctionnementUberEats({
 }) {
   return (
     <div className="space-y-2">
-      <Image
+      <img
         src={image}
         alt={title}
-        className="w-full h-auto object-cover"
-        width={100}
-        height={100}
+        className="w-full h-[300px] rounded-xl object-cover"
       />
       <h4 className="text-zinc-800 mt-4 mb-2">{title}</h4>
-      <p>{description}</p>
-    </div>
-  );
-}
-
-interface CardWhyUberEatsProps {
-  title: string;
-  description: string;
-  icon?: React.ReactNode;
-}
-
-export function CardWhyUberEats({
-  title,
-  description,
-  icon,
-}: CardWhyUberEatsProps) {
-  return (
-    <div className="space-y-2">
-      {icon && <div>{icon}</div>}
-      <h4 className="text-zinc-800">{title}</h4>
       <p>{description}</p>
     </div>
   );
@@ -133,9 +109,11 @@ export default function PageSignup() {
   return (
     <div className="space-y-14 pb-14">
       <section className="bg-black md:bg-[url(/images/point-de-vente-sur-un-marche.webp)] bg-cover bg-center h-full w-full">
-        <div className="container flex items-center justify-between md:gap-8 gap-0 flex-col md:flex-row">
-          <div className="md:w-2/4 w-full bg-black md:p-3 p-0 space-y-4 self-end md:mb-10 mb-5 text-white">
-            <h1>Profitez d'une nouvelle source de revenus</h1>
+        <div className="container flex items-center justify-between  gap-8 flex-col md:flex-row py-7">
+          <div className="md:w-2/4 w-full bg-black md:p-3 p-0 space-y-4 self-end text-white rounded-xl">
+            <h1 className="text-sm font-semibold">
+              Profitez d'une nouvelle source de revenus
+            </h1>
             <p>
               La plateforme internationale d'Uber vous offre la flexibilité, la
               visibilité et les données nécessaires pour vous mettre en relation
@@ -143,7 +121,7 @@ export default function PageSignup() {
             </p>
           </div>
 
-          <div className="bg-white px-5 py-14 h-full md:w-2/4 w-full space-y-5 overflow-y-auto">
+          <div className="bg-white px-5 py-7 h-full md:w-2/4 w-full space-y-5 overflow-y-auto rounded-xl">
             <h2>Créez votre compte</h2>
             <div className="text-muted-foreground space-x-2 text-sm">
               <span>Vous avez déjà un compte ?</span>
@@ -163,10 +141,11 @@ export default function PageSignup() {
           <h2 className="text-zinc-800">Pourquoi Uber Eats ?</h2>
           <div className="grid md:grid-cols-3 grid-cols-1 gap-5">
             {whyUberEats.map((item) => (
-              <CardWhyUberEats
+              <CardWhy
                 key={item.title}
                 title={item.title}
                 description={item.description}
+                icon={<UserIcon className="size-10" />}
               />
             ))}
           </div>
@@ -264,23 +243,19 @@ export default function PageSignup() {
             </p>
           </div>
 
-          <Image
-            src="/images/point-de-vente-sur-un-marche.webp"
+          <img
+            src="/images/placeholder.svg"
             alt="Uber Eats"
-            width={400}
-            height={400}
-            className="md:w-1/2 w-full h-auto object-cover"
+            className="md:w-1/2 w-full h-[400px] rounded-xl object-cover"
           />
         </div>
       </section>
 
       <section className="container flex items-center justify-between gap-8 flex-col-reverse md:flex-row">
-        <Image
-          src="/images/point-de-vente-sur-un-marche.webp"
+        <img
+          src="/images/placeholder.svg"
           alt="Uber Eats"
-          width={400}
-          height={400}
-          className="md:w-1/2 w-full h-auto object-cover"
+          className="md:w-1/2 w-full h-[400px] rounded-xl object-cover"
         />
 
         <div className="md:w-1/2 w-full space-y-4">

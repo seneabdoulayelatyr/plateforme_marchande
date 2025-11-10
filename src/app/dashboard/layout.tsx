@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import SidebarDashboard from "@/components/menus/sidebarDashboard";
 function Layout({ children }: { children: React.ReactNode }) {

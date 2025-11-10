@@ -1,16 +1,30 @@
 "use client";
 import { LogIn, Menu } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SideMenuItems from "@/components/menus/sideMenuItems";
 import { Button } from "@/components/ui/button";
-import { useMediaQuery } from "@uidotdev/usehooks";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export default function SidebarDashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Check on mount
+    checkIsMobile();
+
+    // Add event listener
+    window.addEventListener("resize", checkIsMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };

@@ -12,6 +12,7 @@ import {
 import PhoneInput, { type Country } from "react-phone-number-input";
 import "react-phone-number-input/style.css";
 import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
 
 interface FormFieldProps {
   name: string;
@@ -85,13 +86,10 @@ export function PhoneField({
             value={value || ""}
             onChange={(val) => onChange(val || "")}
             international
-            className="flex gap-2"
-            countrySelectProps={{
-              className: "border border-input rounded-md bg-gray-100 px-2",
-            }}
+            className="flex gap-2 bg-gray-100 rounded-md pl-2"
             numberInputProps={{
               className:
-                "flex-1 h-9 w-full rounded-md border border-input bg-gray-100 px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+                "flex-1 h-9 w-full rounded-r-md px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-1 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
             }}
           />
         )}
@@ -161,8 +159,7 @@ export function CheckboxField({ name, label }: checkboxFieldProps) {
   } = useFormContext();
   const error = errors[name]?.message as string | undefined;
   return (
-    <div className="space-y-2 w-full">
-      <Label htmlFor={name}>{label}</Label>
+    <div className="w-full flex items-start gap-2">
       <Controller
         name={name}
         control={control}
@@ -171,6 +168,52 @@ export function CheckboxField({ name, label }: checkboxFieldProps) {
             id={name}
             checked={field.value}
             onCheckedChange={field.onChange}
+          />
+        )}
+      />
+      <Label htmlFor={name}>{label}</Label>
+      {error && <p className="text-xs text-red-500">{error}</p>}
+    </div>
+  );
+}
+
+interface TextareaFieldProps {
+  name: string;
+  label: string;
+  placeholder?: string;
+  className?: string;
+  rows?: number;
+}
+
+export function TextareaField({
+  name,
+  label,
+  placeholder = "Entrez votre message",
+  className,
+  rows = 4,
+}: TextareaFieldProps) {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+  const error = errors[name]?.message as string | undefined;
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={name}>{label}</Label>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <textarea
+            {...field}
+            id={field.name}
+            className={cn(
+              "w-full h-32 rounded-md p-2 border border-gray-300 bg-gray-100",
+              className
+            )}
+            placeholder={placeholder}
+            rows={rows}
+            value={field.value || ""}
           />
         )}
       />

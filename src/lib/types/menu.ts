@@ -9,7 +9,7 @@ import {
 
 export interface MenuItem {
   label: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
   href: string;
   items?: MenuItem[];
 }
@@ -49,5 +49,18 @@ export const menu_items: MenuItems = {
       icon: SettingsIcon,
       href: "/settings",
     },
+  ],
+};
+
+export const menu_home_items: MenuItems = {
+  items: [
+    {
+      label: "Comment ça marche ?",
+      href: "/how-it-works",
+    },
+    {
+      label: "Support",
+      href: "/support",
+    }
   ],
 };
